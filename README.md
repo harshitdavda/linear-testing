@@ -3,10 +3,9 @@
 Sandbox repo for testing Linear Reviews (Diffs), PR automations and Loops.
 
 ```bash
-pnpm install
-pnpm test
+pnpm install --frozen-lockfile
+pnpm typecheck && pnpm test
 pnpm lint
-pnpm typecheck
 ```
 
 ## CI on demand
