@@ -1,5 +1,5 @@
 import { type Cart, subtotal } from "./cart";
-import { addTax, applyDiscount } from "./pricing";
+import { addTax, applyDiscount, shippingFor } from "./pricing";
 
 export * from "./cart";
 export * from "./format";
@@ -10,5 +10,6 @@ export function checkoutTotal(
   taxRate: number,
   code?: string,
 ): number {
-  return addTax(applyDiscount(subtotal(cart), code), taxRate);
+  const items = subtotal(cart);
+  return addTax(applyDiscount(items, code), taxRate) + shippingFor(items);
 }

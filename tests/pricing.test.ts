@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { addItem, checkoutTotal, createCart } from "../src";
-import { addTax, applyDiscount } from "../src/pricing";
+import { addTax, applyDiscount, shippingFor } from "../src/pricing";
 
 describe("pricing", () => {
   it("applies discount codes case-insensitively", () => {
@@ -22,6 +22,24 @@ describe("pricing", () => {
       priceCents: 2000,
       quantity: 1,
     });
-    expect(checkoutTotal(cart, 0.1, "HALFOFF")).toBe(1100);
+    expect(checkoutTotal(cart, 0.1, "HALFOFF")).toBe(1599);
+  });
+
+  it("ships free at $50 and above", () => {
+    expect(shippingFor(4999)).toBe(499);
+    expect(shippingFor(5000)).toBe(0);
+  });
+
+  it("charges no shipping for an empty cart", () => {
+    expect(shippingFor(0)).toBe(0);
+  });
+
+  it("uses the pre-discount subtotal for free shipping", () => {
+    const cart = addItem(createCart(), {
+      sku: "a",
+      priceCents: 6000,
+      quantity: 1,
+    });
+    expect(checkoutTotal(cart, 0, "HALFOFF")).toBe(3000);
   });
 });
