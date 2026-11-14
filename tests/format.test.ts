@@ -10,4 +10,9 @@ describe("formatMoney", () => {
   it("formats zero-decimal currencies", () => {
     expect(formatMoney(12300, "JPY")).toBe("¥123");
   });
+
+  it("puts the minus sign before the symbol for refunds", () => {
+    expect(formatMoney(-1234, "USD")).toBe("-$12.34");
+    expect(formatMoney(-12300, "JPY")).toBe("-¥123");
+  });
 });
