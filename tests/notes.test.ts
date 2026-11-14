@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { cleanNote, isNoteEmpty, MAX_NOTE_LENGTH } from "../src/notes";
+import {
+  cleanNote,
+  isNoteEmpty,
+  MAX_NOTE_LENGTH,
+  notePreview,
+} from "../src/notes";
 
 describe("cleanNote", () => {
   it("trims whitespace", () => {
@@ -32,5 +37,25 @@ describe("isNoteEmpty", () => {
     expect(isNoteEmpty("   ")).toBe(true);
     expect(isNoteEmpty("\u0000\u0001")).toBe(true);
     expect(isNoteEmpty("hi")).toBe(false);
+  });
+});
+
+describe("notePreview", () => {
+  it("returns short single-line notes as they are", () => {
+    expect(notePreview("leave at door", 20)).toBe("leave at door");
+  });
+
+  it("cuts long notes with an ellipsis", () => {
+    expect(notePreview("please leave it with the neighbour", 12)).toBe(
+      "please leav…",
+    );
+  });
+
+  it("shows only the first line", () => {
+    expect(notePreview("gate code 42\nback door", 40)).toBe("gate code 42…");
+  });
+
+  it("rejects tiny limits", () => {
+    expect(() => notePreview("hi", 1)).toThrow();
   });
 });

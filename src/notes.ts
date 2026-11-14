@@ -25,3 +25,17 @@ export function cleanNote(raw: string): CleanNote {
 export function isNoteEmpty(raw: string): boolean {
   return cleanNote(raw).note.length === 0;
 }
+
+export function notePreview(note: string, maxChars: number): string {
+  if (!Number.isInteger(maxChars) || maxChars < 2) {
+    throw new Error("maxChars must be at least 2");
+  }
+  const firstLine = note.split("\n")[0] ?? "";
+  const chars = Array.from(firstLine);
+  const hasMore = chars.length > maxChars || note.includes("\n");
+  if (!hasMore) return firstLine;
+  return `${chars
+    .slice(0, maxChars - 1)
+    .join("")
+    .trimEnd()}…`;
+}
