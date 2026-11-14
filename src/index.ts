@@ -3,6 +3,7 @@ import { addTax, applyDiscount } from "./pricing";
 
 export * from "./cart";
 export * from "./format";
+export * from "./gift-cards";
 export * from "./pricing";
 
 export function checkoutTotal(
