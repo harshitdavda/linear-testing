@@ -8,6 +8,12 @@ pnpm typecheck && pnpm test
 pnpm lint
 ```
 
+## Docs
+
+- [Addresses](docs/address.md)
+- [Supported countries](docs/countries.md)
+- [Pricing](docs/pricing.md)
+
 ## CI on demand
 
 Add these PR labels to force a CI job to fail:
