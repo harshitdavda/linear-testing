@@ -1,6 +1,6 @@
-import { CURRENCIES, type CurrencyCode } from "../generated/currencies";
+import { CURRENCIES, type CurrencyCode } from "../../generated/currencies";
 
-export function formatMoney(
+export function formatCents(
   cents: number,
   currency: CurrencyCode = "USD",
 ): string {
