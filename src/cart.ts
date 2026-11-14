@@ -8,6 +8,7 @@ export function createCart(): Cart {
 
 export function addItem(cart: Cart, item: CartItem): Cart {
   if (item.quantity <= 0) throw new Error("quantity must be positive");
+  if (item.priceCents < 0) throw new Error("priceCents must be non-negative");
   const existing = cart.items.find((i) => i.sku === item.sku);
   if (!existing) return { items: [...cart.items, item] };
   return {
