@@ -24,3 +24,14 @@ export function removeItem(cart: Cart, sku: string): Cart {
 export function subtotal(cart: Cart): number {
   return cart.items.reduce((sum, i) => sum + i.priceCents * i.quantity, 0);
 }
+
+export function updateQuantity(
+  cart: Cart,
+  sku: string,
+  quantity: number,
+): Cart {
+  if (quantity < 0) throw new Error("quantity cannot be negative");
+  return {
+    items: cart.items.map((i) => (i.sku === sku ? { ...i, quantity } : i)),
+  };
+}
