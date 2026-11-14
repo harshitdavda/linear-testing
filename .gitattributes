@@ -1,0 +1,4 @@
+tests/** review-test
+docs/** review-documentation
+*.md review-documentation
+generated/** linguist-generated=true
