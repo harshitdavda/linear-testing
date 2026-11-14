@@ -9,6 +9,7 @@ export function checkoutTotal(
   cart: Cart,
   taxRate: number,
   code?: string,
+  now: Date = new Date(),
 ): number {
-  return addTax(applyDiscount(subtotal(cart), code), taxRate);
+  return addTax(applyDiscount(subtotal(cart), code, now), taxRate);
 }
