@@ -7,7 +7,8 @@ export function createCart(): Cart {
 }
 
 export function addItem(cart: Cart, item: CartItem): Cart {
-  if (item.quantity <= 0) throw new Error("quantity must be positive");
+  if (!Number.isInteger(item.quantity) || item.quantity <= 0)
+    throw new Error("quantity must be a positive whole number");
   const existing = cart.items.find((i) => i.sku === item.sku);
   if (!existing) return { items: [...cart.items, item] };
   return {

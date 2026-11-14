@@ -27,4 +27,10 @@ describe("cart", () => {
     cart = addItem(cart, { sku: "b", priceCents: 250, quantity: 1 });
     expect(subtotal(removeItem(cart, "a"))).toBe(250);
   });
+
+  it("rejects fractional quantity", () => {
+    expect(() =>
+      addItem(createCart(), { sku: "a", priceCents: 1, quantity: 1.5 }),
+    ).toThrow();
+  });
 });
