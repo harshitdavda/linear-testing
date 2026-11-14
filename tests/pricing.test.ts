@@ -7,6 +7,11 @@ describe("pricing", () => {
     expect(applyDiscount(1000, "welcome10")).toBe(900);
   });
 
+  it("ignores spaces around discount codes", () => {
+    expect(applyDiscount(1000, "  HALFOFF ")).toBe(500);
+    expect(applyDiscount(1000, "   ")).toBe(1000);
+  });
+
   it("throws on unknown codes", () => {
     expect(() => applyDiscount(1000, "NOPE")).toThrow();
   });
