@@ -6,5 +6,6 @@ export function formatMoney(
 ): string {
   const { symbol, decimals } = CURRENCIES[currency];
   const amount = decimals === 0 ? Math.round(cents / 100) : cents / 100;
-  return `${symbol}${amount.toFixed(decimals)}`;
+  const sign = cents < 0 ? "-" : "";
+  return `${sign}${symbol}${amount.toFixed(decimals)}`;
 }
