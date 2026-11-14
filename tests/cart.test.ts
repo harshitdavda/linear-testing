@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { addItem, createCart, removeItem, subtotal } from "../src/cart";
+import {
+  addItem,
+  createCart,
+  removeItem,
+  subtotal,
+  updateQuantity,
+} from "../src/cart";
 
 describe("cart", () => {
   it("adds and merges items by sku", () => {
@@ -26,5 +32,14 @@ describe("cart", () => {
     });
     cart = addItem(cart, { sku: "b", priceCents: 250, quantity: 1 });
     expect(subtotal(removeItem(cart, "a"))).toBe(250);
+  });
+
+  it("updates the quantity of an item", () => {
+    const cart = addItem(createCart(), {
+      sku: "a",
+      priceCents: 500,
+      quantity: 1,
+    });
+    expect(updateQuantity(cart, "a", 4).items[0].quantity).toBe(4);
   });
 });
