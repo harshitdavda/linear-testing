@@ -10,7 +10,16 @@ export function applyDiscount(subtotalCents: number, code?: string): number {
   return Math.round(subtotalCents * (1 - rate));
 }
 
+const HALF_TOLERANCE = 1e-9;
+
+export function roundHalfEven(value: number): number {
+  const floor = Math.floor(value);
+  const fraction = value - floor;
+  if (Math.abs(fraction - 0.5) > HALF_TOLERANCE) return Math.round(value);
+  return floor % 2 === 0 ? floor : floor + 1;
+}
+
 export function addTax(cents: number, rate: number): number {
   if (rate < 0) throw new Error("tax rate cannot be negative");
-  return Math.round(cents * (1 + rate));
+  return cents + roundHalfEven(cents * rate);
 }
