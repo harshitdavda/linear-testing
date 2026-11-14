@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { addItem, checkoutTotal, createCart } from "../src";
-import { addTax, applyDiscount } from "../src/pricing";
+import { addItem, checkoutTotal, createCart } from "../../src";
+import { applyDiscount, applyTax } from "../../src/money";
 
 describe("pricing", () => {
   it("applies discount codes case-insensitively", () => {
@@ -12,8 +12,8 @@ describe("pricing", () => {
   });
 
   it("adds tax and rejects negative rates", () => {
-    expect(addTax(1000, 0.18)).toBe(1180);
-    expect(() => addTax(1000, -0.1)).toThrow();
+    expect(applyTax(1000, 0.18)).toBe(1180);
+    expect(() => applyTax(1000, -0.1)).toThrow();
   });
 
   it("computes checkout total", () => {
