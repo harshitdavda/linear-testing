@@ -19,5 +19,6 @@ export const FREE_SHIPPING_THRESHOLD_CENTS = 5000;
 export const SHIPPING_CENTS = 499;
 
 export function shippingFor(subtotalCents: number): number {
+  if (subtotalCents === 0) return 0;
   return subtotalCents >= FREE_SHIPPING_THRESHOLD_CENTS ? 0 : SHIPPING_CENTS;
 }

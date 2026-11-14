@@ -30,6 +30,10 @@ describe("pricing", () => {
     expect(shippingFor(5000)).toBe(0);
   });
 
+  it("charges no shipping for an empty cart", () => {
+    expect(shippingFor(0)).toBe(0);
+  });
+
   it("uses the pre-discount subtotal for free shipping", () => {
     const cart = addItem(createCart(), {
       sku: "a",
