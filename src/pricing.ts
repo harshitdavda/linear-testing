@@ -4,8 +4,9 @@ const DISCOUNTS: Record<string, number> = {
 };
 
 export function applyDiscount(subtotalCents: number, code?: string): number {
-  if (!code) return subtotalCents;
-  const rate = DISCOUNTS[code.toUpperCase()];
+  const normalized = code?.trim().toUpperCase();
+  if (!normalized) return subtotalCents;
+  const rate = DISCOUNTS[normalized];
   if (rate === undefined) throw new Error(`unknown discount code: ${code}`);
   return Math.round(subtotalCents * (1 - rate));
 }
